@@ -174,14 +174,15 @@ function DownloadFile(){
 	mkdir python-build
 	cd python-build
 
+	# --with-openssl-rpath=auto  \
+	# 	--with-openssl=/usr/include/openssl  \
+	# 	OPENSSL_LDFLAGS=-L/usr/include/openssl  \
+	# 	OPENSSL_LIBS=-l/usr/include/openssl/ssl \
+	# 	OPENSSL_INCLUDES=-I/usr/include/openssl 
+
 	/tmp/Python-${CHOICE_VERSION}/configure --prefix=/usr/local/python${CHOICE_VERSION} \
 		--enable-optimizations \
-		--with-ssl \
-		--with-openssl-rpath=auto  \
-		--with-openssl=/usr/include/openssl  \
-		OPENSSL_LDFLAGS=-L/usr/include/openssl  \
-		OPENSSL_LIBS=-l/usr/include/openssl/ssl \
-		OPENSSL_INCLUDES=-I/usr/include/openssl 
+		--with-ssl
 
 	make -j2
 	make install
