@@ -186,6 +186,8 @@ function DownloadFile(){
 
 	make -j2
 	make install
+
+	rm -rf /tmp/Python-${CHOICE_VERSION}
 }
 
 function RunMain(){
