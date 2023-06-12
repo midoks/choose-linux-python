@@ -171,7 +171,6 @@ function DownloadFile(){
 
 	/tmp/Python-${CHOICE_VERSION}/configure --prefix=/usr/local/python${CHOICE_VERSION} \
 		--enable-optimizations \
-		--with-zlib=/usr/include/ \
 		--with-openssl-rpath=auto  \
 		--with-openssl=/usr/include/openssl  \
 		OPENSSL_LDFLAGS=-L/usr/include/openssl  \
