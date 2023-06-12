@@ -43,7 +43,7 @@ PY_VERSION["3.11.3"]="3.10.3"
 
 SOURCE_LIST_KEY_SORT_TMP=$(echo ${!PY_VERSION[@]} | tr ' ' '\n' | sort -n)
 SOURCE_LIST_KEY=(${SOURCE_LIST_KEY_SORT_TMP//'\n'/})
-SOURCE_LIST_LEN=${#SOURCE_LIST[*]}
+SOURCE_LIST_LEN=${#PY_VERSION[*]}
 
 
 ## 环境判定
@@ -138,15 +138,51 @@ function ChooseVersion(){
     CHOICE_A=$(echo -e "\n${BOLD}└─ 请选择并输入你想使用的软件版本 [ 1-${SOURCE_LIST_LEN} ]：${PLAIN}")
 
     read -p "${CHOICE_A}" INPUT
-    echo $CHOICE_A
+    echo $INPUT
 
+    if [ "$INPUT" == "" ];then
+        INPUT=1
+        TMP_INPUT=`expr $INPUT - 1`
+        INPUT_KEY=${SOURCE_LIST_KEY[$TMP_INPUT]}
+        echo -e "\n 默认选择[${BLUE}${INPUT_KEY}${PLAIN}]安装！"
+    fi
+
+    INPUT=`expr $INPUT - 1`
+    INPUT_KEY=${SOURCE_LIST_KEY[$INPUT]}
+    CHOICE_VERSION=${PY_VERSION[$INPUT_KEY]}
+}
+
+function DownloadFile(){
+
+	url="https://www.python.org/ftp/python/${CHOICE_VERSION}/Python-${CHOICE_VERSION}.tar.xz"
+	echo $url
+	tmp_file=/tmp/Python-${CHOICE_VERSION}.tar.xz
+	if [ ! -f $tmp_file ];then
+		wget -O $tmp_file $url
+		tar -xvJf Python-${CHOICE_VERSION}.tar.xz
+	fi	
+
+	mkdir python-build
+	cd python-build
+
+	/tmp/Python-${CHOICE_VERSION}/configure --prefix=/usr/local/python${CHOICE_VERSION} \
+		--enable-optimizations \
+		--with-zlib=/usr/include/ \
+		--with-openssl-rpath=auto  \
+		--with-openssl=/usr/include/openssl  \
+		OPENSSL_LDFLAGS=-L/usr/include/openssl  \
+		OPENSSL_LIBS=-l/usr/include/openssl/ssl \
+		OPENSSL_INCLUDES=-I/usr/include/openssl 
+
+	make -j2
+	make install
 }
 
 function RunMain(){
 	EnvJudgment
 	PermissionJudgment
 	ChooseVersion
-    # DownloadScript
+    DownloadFile
     # InstallScript
     # RemoveScript
     # AuthorMessage
