@@ -159,8 +159,12 @@ function DownloadFile(){
 	tmp_file=/tmp/Python-${CHOICE_VERSION}.tar.xz
 	if [ ! -f $tmp_file ];then
 		wget -O $tmp_file $url
+	fi
+
+	cd /tmp
+	if [ ! -d /tmp/Python-${CHOICE_VERSION} ];then
 		tar -xvJf Python-${CHOICE_VERSION}.tar.xz
-	fi	
+	fi
 
 	mkdir python-build
 	cd python-build
