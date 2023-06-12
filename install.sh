@@ -17,6 +17,18 @@ WARN='[\033[33mWARN\033[0m]'
 ERROR='[\033[31mERROR\033[0m]'
 WORKING='[\033[34m*\033[0m]'
 
+DebianVersion=/etc/debian_version
+DebianSourceList=/etc/apt/sources.list
+DebianSourceListBackup=/etc/apt/sources.list.bak
+DebianExtendListDir=/etc/apt/sources.list.d
+DebianExtendListDirBackup=/etc/apt/sources.list.d.bak
+
+SYSTEM_UBUNTU="Ubuntu"
+SYSTEM_DEBIAN="Debian"
+
+LinuxRelease=/etc/os-release
+RedHatRelease=/etc/redhat-release
+
 ARCH=$(uname -m)
 
 SYSTEM_NAME=$(cat $LinuxRelease | grep -E "^NAME=" | awk -F '=' '{print$2}' | sed "s/[\'\"]//g")
@@ -29,7 +41,7 @@ declare -A PY_VERSION
 PY_VERSION["3.10.10"]="3.10.10"
 PY_VERSION["3.11.3"]="3.10.3"
 
-SOURCE_LIST_KEY_SORT_TMP=$(echo ${!SOURCE_LIST[@]} | tr ' ' '\n' | sort -n)
+SOURCE_LIST_KEY_SORT_TMP=$(echo ${!PY_VERSION[@]} | tr ' ' '\n' | sort -n)
 SOURCE_LIST_KEY=(${SOURCE_LIST_KEY_SORT_TMP//'\n'/})
 SOURCE_LIST_LEN=${#SOURCE_LIST[*]}
 
@@ -125,7 +137,8 @@ function ChooseVersion(){
     echo -e '#####################################################'
     CHOICE_A=$(echo -e "\n${BOLD}└─ 请选择并输入你想使用的软件版本 [ 1-${SOURCE_LIST_LEN} ]：${PLAIN}")
 
-    print(CHOICE_A)
+    read -p "${CHOICE_A}" INPUT
+    echo $CHOICE_A
 
 }
 
