@@ -157,7 +157,7 @@ function InstallDep(){
         wget --no-check-certificate -O /tmp/openssl-1.1.1p.tar.gz https://www.openssl.org/source/openssl-1.1.1p.tar.gz
     fi 
 
-    if [ ! -d /tmp/openssl-1.1.1p ];
+    if [ ! -d /tmp/openssl-1.1.1p ]; then
     	cd /tmp/ && tar -zxvf openssl-1.1.1p.tar.gz
    	fi
     cd /tmp/openssl-1.1.1p
