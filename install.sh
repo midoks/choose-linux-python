@@ -154,6 +154,11 @@ function ChooseVersion(){
 
 function DownloadFile(){
 
+	if [ -d /usr/local/python${CHOICE_VERSION} ];then
+		echo "${CHOICE_VERSION} already installed!"
+		exit 0
+	fi
+
 	url="https://www.python.org/ftp/python/${CHOICE_VERSION}/Python-${CHOICE_VERSION}.tar.xz"
 	echo $url
 	tmp_file=/tmp/Python-${CHOICE_VERSION}.tar.xz
