@@ -153,6 +153,9 @@ function ChooseVersion(){
 }
 
 function InstallDep(){
+	if [ -d /usr/local/openssl ];then
+		exit 0
+	fi
 	if [ ! -f /tmp/openssl-1.1.1p.tar.gz ];then
 		wget --no-check-certificate -O /tmp/openssl-1.1.1p.tar.gz https://www.openssl.org/source/openssl-1.1.1p.tar.gz
 	fi 
