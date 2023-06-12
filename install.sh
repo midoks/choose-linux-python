@@ -201,6 +201,7 @@ function DownloadFile(){
 	/tmp/Python-${CHOICE_VERSION}/configure --prefix=/usr/local/python${CHOICE_VERSION} \
 		--enable-optimizations \
 		--with-ssl \
+		--with-openssl=/usr/local/openssl \
 		--with-openssl-rpath=auto
 
 	make -j2
