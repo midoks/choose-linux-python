@@ -152,12 +152,30 @@ function ChooseVersion(){
     CHOICE_VERSION=${PY_VERSION[$INPUT_KEY]}
 }
 
+function InstallDep(){
+	if [ ! -f /tmp/openssl-1.1.1p.tar.gz ];then
+        wget --no-check-certificate -O /tmp/openssl-1.1.1p.tar.gz https://www.openssl.org/source/openssl-1.1.1p.tar.gz
+    fi 
+
+    if [ ! -d /tmp/openssl-1.1.1p ];
+    	cd /tmp/ && tar -zxvf openssl-1.1.1p.tar.gz
+   	fi
+    cd /tmp/openssl-1.1.1p
+
+    if [ ! -d /usr/local/openssl ];then
+    	./config --prefix=/usr/local/openssl zlib-dynamic shared
+    	make && make install
+	fi
+}
+
 function DownloadFile(){
 
 	if [ -d /usr/local/python${CHOICE_VERSION} ];then
 		echo "${CHOICE_VERSION} already installed!"
 		exit 0
 	fi
+
+
 
 	url="https://www.python.org/ftp/python/${CHOICE_VERSION}/Python-${CHOICE_VERSION}.tar.xz"
 	echo $url
@@ -182,7 +200,8 @@ function DownloadFile(){
 
 	/tmp/Python-${CHOICE_VERSION}/configure --prefix=/usr/local/python${CHOICE_VERSION} \
 		--enable-optimizations \
-		--with-ssl
+		--with-ssl \
+		--with-openssl-rpath=auto
 
 	make -j2
 	make install
@@ -194,6 +213,7 @@ function RunMain(){
 	EnvJudgment
 	PermissionJudgment
 	ChooseVersion
+	InstallDep
     DownloadFile
     # InstallScript
     # RemoveScript
