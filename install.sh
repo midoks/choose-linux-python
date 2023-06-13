@@ -218,8 +218,14 @@ function DownloadFile(){
 }
 
 function RemoveFile(){
-	rm -rf /tmp/Python-${CHOICE_VERSION}
-	rm -rf /tmp/Python-${CHOICE_VERSION}.tar.xz
+
+	if [ -d /tmp/Python-${CHOICE_VERSION} ];then
+		rm -rf /tmp/Python-${CHOICE_VERSION}
+	fi
+
+	if [ -f /tmp/Python-${CHOICE_VERSION}.tar.xz ];then
+		rm -rf /tmp/Python-${CHOICE_VERSION}.tar.xz
+	fi
 }
 
 
