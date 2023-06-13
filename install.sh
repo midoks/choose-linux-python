@@ -47,7 +47,7 @@ PY_VERSION["3.10.10"]="3.10.10"
 PY_VERSION["3.11.3"]="3.11.3"
 PY_VERSION["3.11.4"]="3.11.4"
 
-SOURCE_LIST_KEY_SORT_TMP=$(echo ${!PY_VERSION[@]} | tr ' ' '\n' | sort -n)
+SOURCE_LIST_KEY_SORT_TMP=$(echo ${!PY_VERSION[@]} | tr ' ' '\n')
 SOURCE_LIST_KEY=(${SOURCE_LIST_KEY_SORT_TMP//'\n'/})
 SOURCE_LIST_LEN=${#PY_VERSION[*]}
 
