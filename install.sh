@@ -140,20 +140,19 @@ function ChooseVersion(){
     CHOICE_A=$(echo -e "\n${BOLD}└─ 请选择并输入你想使用的软件版本 [ 1-${SOURCE_LIST_LEN} ]：${PLAIN}")
 
     read -p "${CHOICE_A}" INPUT
-    echo $INPUT
-
+    # echo $INPUT
     if [ "$INPUT" == "" ];then
         INPUT=1
         TMP_INPUT=`expr $INPUT - 1`
         INPUT_KEY=${SOURCE_LIST_KEY[$TMP_INPUT]}
-        echo -e "\n 默认选择[${BLUE}${INPUT_KEY}${PLAIN}]安装！"
+        echo -e "\n默认选择[${BLUE}${INPUT_KEY}${PLAIN}]安装！"
     fi
 
     if [ "$INPUT" -lt "0" ];then
 		INPUT=1
 		TMP_INPUT=`expr $INPUT - 1`
 		INPUT_KEY=${SOURCE_LIST_KEY[$TMP_INPUT]}
-		echo -e "\n 低于边界错误!选择[${BLUE}${INPUT_KEY}${PLAIN}]安装！"
+		echo -e "\n低于边界错误!选择[${BLUE}${INPUT_KEY}${PLAIN}]安装！"
 		sleep 2s
 	fi
 
@@ -161,7 +160,7 @@ function ChooseVersion(){
 		INPUT=${SOURCE_LIST_LEN}
 		TMP_INPUT=`expr $INPUT - 1`
 		INPUT_KEY=${SOURCE_LIST_KEY[$TMP_INPUT]}
-		echo -e "\n 超出边界错误!选择[${BLUE}${INPUT_KEY}${PLAIN}]安装！"
+		echo -e "\n超出边界错误!选择[${BLUE}${INPUT_KEY}${PLAIN}]安装！"
 		sleep 2s
 	fi
 
