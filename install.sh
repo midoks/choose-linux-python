@@ -208,7 +208,12 @@ function DownloadFile(){
 		--with-openssl-rpath=auto
 
 	make -j2
-	make install	
+	make install
+
+	if [ -d /usr/local/python${CHOICE_VERSION} ];then
+		ln -s /usr/local/python${CHOICE_VERSION}/bin/python /usr/bin/python${CHOICE_VERSION}
+		ln -s /usr/local/python${CHOICE_VERSION}/bin/pip /usr/bin/pip${CHOICE_VERSION}
+	fi
 }
 
 function RemoveFile(){
