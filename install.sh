@@ -156,6 +156,7 @@ function ChooseVersion(){
 
 function InstallDep(){
 	if [ -d /usr/local/openssl ];then
+		echo "openssl already installed!"
 		exit 0
 	fi
 	if [ ! -f /tmp/openssl-1.1.1p.tar.gz ];then
