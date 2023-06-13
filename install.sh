@@ -179,8 +179,6 @@ function DownloadFile(){
 		exit 0
 	fi
 
-
-
 	url="https://www.python.org/ftp/python/${CHOICE_VERSION}/Python-${CHOICE_VERSION}.tar.xz"
 	echo $url
 	tmp_file=/tmp/Python-${CHOICE_VERSION}.tar.xz
@@ -209,9 +207,18 @@ function DownloadFile(){
 		--with-openssl-rpath=auto
 
 	make -j2
-	make install
+	make install	
+}
 
+function RemoveFile(){
 	rm -rf /tmp/Python-${CHOICE_VERSION}
+	rm -rf /tmp/Python-${CHOICE_VERSION}.tar.xz
+}
+
+
+function AuthorMessage() {
+    echo -e "\n${GREEN} ------------ 脚本执行结束 ------------ ${PLAIN}\n"
+    echo -e " \033[1;34m官方网站\033[0m https://github.com/midoks/choose-linux-python\n"
 }
 
 function RunMain(){
@@ -220,9 +227,8 @@ function RunMain(){
 	ChooseVersion
 	InstallDep
     DownloadFile
-    # InstallScript
-    # RemoveScript
-    # AuthorMessage
+    RemoveFile
+    AuthorMessage
 }
 # 执行
 RunMain
