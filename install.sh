@@ -40,7 +40,7 @@ declare -A PY_VERSION
 
 PY_VERSION["3.10.9"]="3.10.9"
 PY_VERSION["3.10.10"]="3.10.10"
-PY_VERSION["3.11.3"]="3.10.3"
+PY_VERSION["3.11.3"]="3.11.3"
 
 SOURCE_LIST_KEY_SORT_TMP=$(echo ${!PY_VERSION[@]} | tr ' ' '\n' | sort -n)
 SOURCE_LIST_KEY=(${SOURCE_LIST_KEY_SORT_TMP//'\n'/})
