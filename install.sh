@@ -149,6 +149,22 @@ function ChooseVersion(){
         echo -e "\n 默认选择[${BLUE}${INPUT_KEY}${PLAIN}]安装！"
     fi
 
+    if [ "$INPUT" -lt "0" ];then
+		INPUT=1
+		TMP_INPUT=`expr $INPUT - 1`
+		INPUT_KEY=${SOURCE_LIST_KEY[$TMP_INPUT]}
+		echo -e "\n 低于边界错误!选择[${BLUE}${INPUT_KEY}${PLAIN}]安装！"
+		sleep 2s
+	fi
+
+	if [ "$INPUT" -gt "${SOURCE_LIST_LEN}" ];then
+		INPUT=${SOURCE_LIST_LEN}
+		TMP_INPUT=`expr $INPUT - 1`
+		INPUT_KEY=${SOURCE_LIST_KEY[$TMP_INPUT]}
+		echo -e "\n 超出边界错误!选择[${BLUE}${INPUT_KEY}${PLAIN}]安装！"
+		sleep 2s
+	fi
+
     INPUT=`expr $INPUT - 1`
     INPUT_KEY=${SOURCE_LIST_KEY[$INPUT]}
     CHOICE_VERSION=${PY_VERSION[$INPUT_KEY]}
