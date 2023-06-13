@@ -157,20 +157,20 @@ function ChooseVersion(){
 function InstallDep(){
 	if [ -d /usr/local/openssl ];then
 		echo "openssl already installed!"
-	else
-		if [ ! -f /tmp/openssl-1.1.1p.tar.gz ];then
-			wget --no-check-certificate -O /tmp/openssl-1.1.1p.tar.gz https://www.openssl.org/source/openssl-1.1.1p.tar.gz
-		fi 
+		return 0
+	fi
+	if [ ! -f /tmp/openssl-1.1.1p.tar.gz ];then
+		wget --no-check-certificate -O /tmp/openssl-1.1.1p.tar.gz https://www.openssl.org/source/openssl-1.1.1p.tar.gz
+	fi 
 
-		if [ ! -d /tmp/openssl-1.1.1p ];then
-			cd /tmp/ && tar -zxvf openssl-1.1.1p.tar.gz
-		fi
-		cd /tmp/openssl-1.1.1p
+	if [ ! -d /tmp/openssl-1.1.1p ];then
+		cd /tmp/ && tar -zxvf openssl-1.1.1p.tar.gz
+	fi
+	cd /tmp/openssl-1.1.1p
 
-		if [ ! -d /usr/local/openssl ];then
-			./config --prefix=/usr/local/openssl zlib-dynamic shared
-			make && make install
-		fi
+	if [ ! -d /usr/local/openssl ];then
+		./config --prefix=/usr/local/openssl zlib-dynamic shared
+		make && make install
 	fi
 }
 
@@ -178,7 +178,7 @@ function DownloadFile(){
 
 	if [ -d /usr/local/python${CHOICE_VERSION} ];then
 		echo "${CHOICE_VERSION} already installed!"
-		exit 0
+		return 0
 	fi
 
 	url="https://www.python.org/ftp/python/${CHOICE_VERSION}/Python-${CHOICE_VERSION}.tar.xz"
