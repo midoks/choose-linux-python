@@ -5,14 +5,12 @@ choose linux python version
 
 ```
 bash <(curl -sSL https://raw.githubusercontent.com/midoks/choose-linux-python/main/install.sh)
-
-curl --insecure -fsSL https://raw.githubusercontent.com/midoks/choose-linux-python/main/install.sh | bash
 ```
 
 - global
 
 ```
-curl --insecure -fsSL https://cdn.jsdelivr.net/gh/midoks/choose-linux-python@latest/install.sh | bash
+bash <(curl -sSL https://cdn.jsdelivr.net/gh/midoks/choose-linux-python@latest/install.sh)
 ```
 
 
