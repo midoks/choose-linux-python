@@ -173,6 +173,8 @@ function ChooseVersion(){
     CHOICE_VERSION=${PY_VERSION[$INPUT_KEY]}
 }
 
+# /usr/local/openssl/bin/openssl version -a
+# export LD_LIBRARY_PATH=/usr/local/openssl/lib:$LD_LIBRARY_PATH
 function InstallDep(){
 	if [ -d /usr/local/openssl ];then
 		echo "openssl already installed!"
