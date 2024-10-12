@@ -236,6 +236,10 @@ function DownloadFile(){
 		ln -s /usr/local/python${CHOICE_VERSION}/bin/python /usr/bin/python${CHOICE_VERSION}
 		ln -s /usr/local/python${CHOICE_VERSION}/bin/pip /usr/bin/pip${CHOICE_VERSION}
 	fi
+
+	if [ -d /tmp/python-build ];then
+		rm -rf /tmp/python-build
+	fi
 }
 
 function RemoveFile(){
