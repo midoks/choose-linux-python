@@ -215,7 +215,7 @@ function DownloadFile(){
 	fi
 
 	mkdir python-build
-	cd python-build
+	cd python-build && rm -rf ./*
 
 	# --with-openssl-rpath=auto  \
 	# 	--with-openssl=/usr/include/openssl  \
